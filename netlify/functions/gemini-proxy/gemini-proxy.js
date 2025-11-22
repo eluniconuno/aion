@@ -1,3 +1,4 @@
+// Forçando atualização para novo deploy Netlify
 import { GoogleGenAI } from '@google/genai';
 
 const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
