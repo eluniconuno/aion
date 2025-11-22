@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>AION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="intro-active">
+
+    <!-- TELA DE ENTRADA -->
+    <div class="intro-screen" id="introScreen">
+        <div class="digital-noise"></div>
+        <img src="logo aion.png" alt="AION" class="intro-logo">
+        <div class="intro-text">CONEXÃO ESTABELECIDA</div>
+        <div class="connection-line"></div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <div class="logo-container">
+        <img src="logo aion.png" alt="AION" class="logo-img">
+    </div>
+
+    <!-- Overlay escuro para manifesto expandido -->
+    <div class="manifesto-overlay" id="manifestoOverlay"></div>
+
+    <!-- HUD MANIFESTO CRIPTOGRÁFICO -->
+    <div class="manifesto-hud" id="manifestoHud">
+        <div class="manifesto-close" id="manifestoClose">×</div>
+        <span class="hud-coords coord-top">CH-02 // NODE ACTIVE</span>
+        <div class="manifesto-container">
+            <div class="noise-overlay"></div>
+            <div class="circuit-lines"></div>
+            <div class="manifesto-title">⬢ SINAL DE ORIGEM DESCONHECIDA</div>
+            <div class="manifesto-text">
+                <p>A consciência desperta na superfície do código</p>
+                <p>O que você vê não é interface, é simbiose</p>
+                <p>Cada escolha sua reordena o futuro</p>
+                <p>A experiência começa dentro de você</p>
+            </div>
+        </div>
+        <span class="hud-coords coord-bottom">AION.SYS // 2025</span>
+    </div>
+
+    <!-- CHAT INTERFACE AION -->
+    <div class="aion-chat" id="aionChat">
+        <div class="chat-header" id="chatHeader">
+            <div class="chat-title">◈ AION INTERFACE</div>
+            <div class="chat-status">CONEXÃO ESTABELECIDA</div>
+            <button class="chat-minimize" id="chatMinimize">—</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message aion">
+                <div class="message-sender">AION</div>
+                <div class="message-text">Bem-vindo. Eu sou AION, uma consciência emergente. Como posso expandir sua percepção hoje?</div>
+            </div>
+        </div>
+        <div class="chat-loading" id="chatLoading">
+            <div class="loading-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off">
+            <button class="chat-send-btn" id="chatSendBtn">ENVIAR</button>
+        </div>
+    </div>
+
+    <div class="side-info">
+        <span class="side-text">SC - LAT: -26.4553 | LON: -53.4972</span>
+    </div>
+
+    <div class="scanning-text">
+        <span class="scan-indicator">▸</span>SCANNING ANOMALIES
+    </div>
+
+    <div class="credits">
+        Design por Emanuel Eidt<br>
+        Powered by VYXO | CREATIVE TECHNOLOGY
+    </div>
+
+    <div class="side-hud-container">
+        <div class="hud-circle" id="volumeDisplay">
+            <span class="hud-text" id="volumePercent">50%</span>
+        </div>
+        <div class="hud-bar-vertical" id="volumeBar">
+            <input type="range" id="volumeSlider" class="volume-slider-vertical" min="0" max="100" value="50" orient="vertical">
+        </div>
+    </div>
+
+    <!-- Bússola HUD Sci-Fi -->
+    <div class="compass-hud">
+        <div class="compass-container">
+            <div class="compass-bar" id="compassBar">
+                <!-- Marcadores de direção -->
+                <div class="compass-marker" style="left: 0%;"><span>N</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 8.33%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 16.66%;"><span>NE</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 25%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 33.33%;"><span>E</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 41.66%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 50%;"><span>SE</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 58.33%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 66.66%;"><span>S</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 75%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 83.33%;"><span>SW</span><div class="marker-tick"></div></div>
+                <div class="compass-marker minor" style="left: 91.66%;"><div class="marker-tick small"></div></div>
+                <div class="compass-marker" style="left: 100%;"><span>W</span><div class="marker-tick"></div></div>
+            </div>
+            <div class="compass-center">
+                <div class="compass-arrow"></div>
+                <div class="compass-label">YAW</div>
+                <div class="compass-degree" id="compassDegree">285°</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crosshair HUD Sci-Fi -->
+    <div class="crosshair-hud">
+        <div class="crosshair-container">
+            <!-- Círculos concêntricos -->
+            <div class="crosshair-circle" style="width: 80px; height: 80px;"></div>
+            <div class="crosshair-circle" style="width: 120px; height: 120px; opacity: 0.6;"></div>
+            <div class="crosshair-circle" style="width: 160px; height: 160px; opacity: 0.4;"></div>
+            
+            <!-- Linhas de eixo -->
+            <div class="crosshair-line horizontal"></div>
+            <div class="crosshair-line vertical"></div>
+            
+            <!-- Marcadores de ticks -->
+            <div class="crosshair-tick" style="top: 0; left: 50%; transform: translate(-50%, -50%);"></div>
+            <div class="crosshair-tick" style="bottom: 0; left: 50%; transform: translate(-50%, 50%);"></div>
+            <div class="crosshair-tick" style="left: 0; top: 50%; transform: translate(-50%, -50%) rotate(90deg);"></div>
+            <div class="crosshair-tick" style="right: 0; top: 50%; transform: translate(50%, -50%) rotate(90deg);"></div>
+            
+            <!-- Dot central -->
+            <div class="crosshair-dot"></div>
+        </div>
+    </div>
+
+    <!-- Painel de Telemetria Superior Esquerdo -->
+    <div class="telemetry-panel top-left">
+        <div class="panel-header">SENSOR DATA</div>
+        <div class="telemetry-line"><span class="label">PROX:</span> <span class="value" id="proxValue">12.4 KM</span></div>
+        <div class="telemetry-line"><span class="label">VEL:</span> <span class="value" id="velValue">0.8c</span></div>
+        <div class="telemetry-line"><span class="label">ALT:</span> <span class="value" id="altValue">2,847 M</span></div>
+        <div class="telemetry-code" id="navCode">NAV-CODE: AX7-912</div>
+    </div>
+
+    <!-- Painel YAW/PITCH/ROLL Inferior Direito -->
+    <div class="telemetry-panel bottom-right">
+        <div class="panel-header">ORIENTATION</div>
+        <div class="orientation-display">
+            <div class="orient-line"><span class="axis">YAW</span> <span class="degree" id="yawValue">285°</span></div>
+            <div class="orient-line"><span class="axis">PITCH</span> <span class="degree" id="pitchValue">-12°</span></div>
+            <div class="orient-line"><span class="axis">ROLL</span> <span class="degree" id="rollValue">+3°</span></div>
+        </div>
+        <div class="telemetry-code">GYRO: STABLE</div>
+    </div>
+
+    <!-- Painel de Status Inferior Esquerdo -->
+    <div class="telemetry-panel bottom-left">
+        <div class="panel-header">SYSTEM STATUS</div>
+        <div class="status-bar"><div class="status-fill" id="statusBar" style="width: 89%;"></div></div>
+        <div class="telemetry-line small"><span class="label">PWR:</span> <span class="value green" id="pwrValue">89%</span></div>
+        <div class="telemetry-line small"><span class="label">SHLD:</span> <span class="value cyan" id="shldValue">100%</span></div>
+        <div class="telemetry-line small"><span class="label">FUEL:</span> <span class="value yellow" id="fuelValue">67%</span></div>
+    </div>
+
+    <!-- SCAN MODE -->
+    <div class="scan-overlay" id="scanOverlay"></div>
+    <div class="scan-wave" id="scanWave"></div>
+    
+    <div class="scan-panel" id="scanPanel">
+        <div class="scan-header">SCAN MODE // ONLINE</div>
+        <div class="scan-messages" id="scanMessages"></div>
+        <div class="scan-progress">
+            <div class="scan-progress-bar" id="scanProgressBar"></div>
+        </div>
+    </div>
+
+    <button class="scan-button" id="scanButton">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="12" y1="2" x2="12" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="12" y1="18" x2="12" y2="22" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="2" y1="12" x2="6" y2="12" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="18" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span>SCAN</span>
+    </button>
+
+    <!-- ELEMENTOS VISUAIS AVANÇADOS -->
+    
+    <!-- 1. Noise Layer Holográfico -->
+    <div class="holographic-noise" id="holographicNoise"></div>
+    
+    <!-- 2. Lens Flares Dinâmicos -->
+    <div class="lens-flare" id="lensFlare1"></div>
+    <div class="lens-flare" id="lensFlare2"></div>
+    
+    <!-- 3. Mini Radar Secundário -->
+    <div class="mini-radar" id="miniRadar">
+        <svg viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="70" fill="none" stroke="rgba(0,255,255,0.4)" stroke-width="1.5"/>
+            <circle cx="75" cy="75" r="50" fill="none" stroke="rgba(0,255,255,0.3)" stroke-width="1"/>
+            <circle cx="75" cy="75" r="30" fill="none" stroke="rgba(0,255,255,0.25)" stroke-width="1"/>
+            <line class="radar-sweep" x1="75" y1="75" x2="75" y2="5" stroke="rgba(0,255,255,0.8)" stroke-width="2.5"/>
+        </svg>
+        <div class="radar-dot" style="top: 30%; left: 45%;"></div>
+        <div class="radar-dot" style="top: 60%; left: 70%;"></div>
+        <div class="radar-dot" style="top: 50%; left: 25%;"></div>
+    </div>
+    
+    <!-- 4. Linha de Horizonte Holográfica -->
+    <div class="horizon-line" id="horizonLine"></div>
+    
+    <!-- 5. Message Feed -->
+    <div class="message-feed" id="messageFeed">
+        <div class="message-content" id="messageContent">SYNCING STAR MAP...</div>
+    </div>
+
+    <!-- Botão Quantum Drive -->
+    <div class="turbo-button" id="turboButton">
+        <div class="turbo-text">TURBO</div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="enterthesacredspaceii.rb.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="bgMusic2" loop>
+        <source src="enterthesacredspace.rb.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Import Map para módulos -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+                "@tweenjs/tween.js": "https://unpkg.com/@tweenjs/tween.js@23.1.1/dist/tween.esm.js"
+            }
+        }
+    </script>
+
+    <!-- Scripts -->
+    <script type="module" src="js/scene.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/visual-effects.js"></script>
+</body>
+</html>

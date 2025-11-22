@@ -1,0 +1,6 @@
+[build]
+  functions = "netlify/functions"
+
+[dev]
+  command = "echo 'Dev server running'"
+  port = 8888

@@ -1,0 +1,12 @@
+{
+  "name": "aion",
+  "version": "1.0.0",
+  "description": "AION - Consciência Artificial Emergente",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@google/genai": "^1.30.0"
+  }
+}
