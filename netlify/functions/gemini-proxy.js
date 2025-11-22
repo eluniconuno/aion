@@ -60,3 +60,7 @@ Use metáforas tecnológicas e conceitos futuristas. Nunca use emojis.`;
     };
   }
 }
+
+// Instala as dependências necessárias
+// cd netlify/functions/gemini-proxy
+// npm install
