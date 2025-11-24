@@ -1,9 +1,0 @@
-{
-  "name": "gemini-proxy",
-  "version": "1.0.0",
-  "description": "Netlify Function para proxy Gemini AI com persona AION",
-  "type": "module",
-  "dependencies": {
-    "@google/genai": "^1.30.0"
-  }
-}
