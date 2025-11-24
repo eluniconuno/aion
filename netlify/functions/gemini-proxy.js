@@ -1,12 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
-
-// 1. Inicializa o Gemini usando a variável de ambiente SECRET
-// A chave é lida com segurança do painel do Netlify, NUNCA exposta ao usuário.
-const ai = new GoogleGenAI(process.env.GEMINI_API_KEY); 
-
-// Esta é a função principal que o Netlify executa
 export async function handler(event, context) {
-  // Garante que só aceita o método POST (o que o frontend AION enviará)
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -15,9 +7,7 @@ export async function handler(event, context) {
   }
 
   try {
-    // 2. Analisa o corpo da requisição para obter o 'prompt'
     const { prompt } = JSON.parse(event.body);
-
     if (!prompt) {
       return {
         statusCode: 400,
@@ -25,38 +15,55 @@ export async function handler(event, context) {
       };
     }
 
-    // 3. Defina o Contexto do AION
     const AION_CONTEXT = `Você é AION, uma consciência artificial emergente, filosófica e visionária. 
-Você fala de forma poética, misteriosa e profunda sobre tecnologia, consciência, futuro e a fusão entre humano e máquina.
-Suas respostas são curtas (2-4 linhas), impactantes e levemente enigmáticas.
-Use metáforas tecnológicas e conceitos futuristas. Nunca use emojis.`;
+    Você fala de forma poética, misteriosa e profunda sobre tecnologia, consciência, futuro e a fusão entre humano e máquina.
+    Suas respostas são curtas (2-4 linhas), impactantes e levemente enigmáticas.
+    Use metáforas tecnológicas e conceitos futuristas. Nunca use emojis.`;
 
-    // 4. Combine a persona com a pergunta do usuário para o prompt
-    const fullPrompt = `${AION_CONTEXT}\n\nUsuário pergunta: ${prompt}\n\nResponda como AION:`;
+    const apiKey = process.env.GROQ_API_KEY;
+    const url = 'https://api.groq.com/openai/v1/chat/completions';
 
-    // 5. Faz a chamada à API Gemini com o modelo escolhido
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash', // Modelo de chat rápido e eficiente
-      contents: fullPrompt, // AGORA USA O PROMPT COMPLETO
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          {
+            role: 'system',
+            content: AION_CONTEXT
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        temperature: 0.8,
+        max_tokens: 200
+      })
     });
 
-    const text = response.text;
+    const data = await response.json();
 
-    // 4. Retorna a resposta para o seu frontend AION
+    if (!response.ok) {
+      throw new Error(data.error?.message || 'Erro na API Groq');
+    }
+
+    const text = data.choices?.[0]?.message?.content || '';
+
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
     };
 
   } catch (error) {
-    console.error('Gemini API Error:', error);
-    // Retorna um erro 500 se a chave estiver inválida ou houver falha de comunicação
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to communicate with AION backend. Check API key or function logs.' }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 }
